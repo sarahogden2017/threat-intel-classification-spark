@@ -1,0 +1,1 @@
+BASE_URL = "https://www.cisa.gov/news-events/cybersecurity-advisories/"
