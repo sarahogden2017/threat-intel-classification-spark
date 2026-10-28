@@ -92,7 +92,30 @@ services:
       org.apache.spark.deploy.worker.Worker
       spark://spark:7077
 
+  nifi:
+    image: apache/nifi:latest
+    container_name: nifi
+    restart: always
+    depends_on:
+      - namenode
+    ports:
+      - "8443:8443"
+    environment:
+      SINGLE_USER_CREDENTIALS_USERNAME: admin
+      SINGLE_USER_CREDENTIALS_PASSWORD: adminadminadmin
+    volumes:
+      - nifi_conf:/opt/nifi/nifi-current/conf
+      - nifi_database:/opt/nifi/nifi-current/database_repository
+      - nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository
+      - nifi_content:/opt/nifi/nifi-current/content_repository
+      - nifi_provenance:/opt/nifi/nifi-current/provenance_repository
+
 volumes:
   hadoop_namenode:
   hadoop_datanode:
   hadoop_historyserver:
+  nifi_conf:
+  nifi_database:
+  nifi_flowfile:
+  nifi_content:
+  nifi_provenance:
